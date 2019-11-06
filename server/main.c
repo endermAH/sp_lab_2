@@ -7,7 +7,6 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/types.h>
-#include <time.h>
 
 const char *optString = "p:h";
 
@@ -20,7 +19,7 @@ void error(char* msg) {
   exit(1);
 }
 
-void displayUsage() {
+void displayUsage(char* name) {
   printf("\nUSAGE:\n%s [-h] [-p <port number>]\n\nARGS: \n-p Port number to listen\n-h: Help\n\n", name);
   exit(0);
 }
@@ -36,7 +35,7 @@ int getStartData(int argc, char** argv) {
         globalArgs.portno = atoi(optarg);
         break;
       case 'h':
-        display_usage(argv[0]);
+        displayUsage(argv[0]);
         break;
       default:
         break;
@@ -58,7 +57,7 @@ int getStartData(int argc, char** argv) {
 }
 
 int main(int argc, char *argv[]) {
-  int listenfd; //Socket descriptor
+  int listenfd, connfd; //Socket descriptors
   int portno; //Port number
   struct sockaddr_in serv_addr; //IP struct
   struct hostnet *server;
@@ -68,12 +67,12 @@ int main(int argc, char *argv[]) {
   if (!getStartData(argc, argv)) exit(1); //Stop server with wrong input
 
   //Creating socket
-  listenfd = socket(AF_INET, SOCK_STREAM, IPPROTO_UDP);
-  if (sockfd < 0) error("Can not open socket");
+  listenfd = socket(AF_INET, SOCK_STREAM, 0);
+  if (listenfd < 0) error("Can not open \n");
 
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-  serv_addr.sin_port = htons(5000);
+  serv_addr.sin_port = htons(globalArgs.portno);
 
   bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)); //Binding socket
 
@@ -82,8 +81,8 @@ int main(int argc, char *argv[]) {
   while(1) {
     connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
 
-    snprintf(sendBuff, sizeof(sendBuff), "DAROVA VI POPALI V UGANDU\r\n")
-    write(connfd, sendBuff, strlen(sendBuff));
+    snprintf(buffer, sizeof(buffer), "DAROVA VI POPALI V UGANDU\r\n");
+    write(connfd, buffer, strlen(buffer));
 
     close(connfd);
     sleep(1);
