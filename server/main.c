@@ -8,11 +8,12 @@
 #include <string.h>
 #include <sys/types.h>
 
-const char *optString = "p:h";
+const char *optString = "p:w:h";
 const int BUFFER_LENGTH = 256;
 
 struct globalArgs_t {
   int portno;
+  int wait_time = 0;
 } globalArgs;
 
 void error(char* msg) {
@@ -38,6 +39,8 @@ int getStartData(int argc, char** argv) {
       case 'h':
         displayUsage(argv[0]);
         break;
+      case 'w':
+        globalArgs.wait_time = atoi(optarg);
       default:
         break;
     }
@@ -81,12 +84,13 @@ int main(int argc, char *argv[]) {
 
   int counter;
   short is_SNILS;
-  //char response[1];
+
   while(1) {
     memset(buffer, 0, BUFFER_LENGTH);
     int count = recvfrom(listenfd, buffer, BUFFER_LENGTH - 1, 0, &from, &struct_len);
     counter = 0;
     is_SNILS = 1;
+
     for (int i = 0; i < count; i++) {
       if (buffer[i] == ' ' || buffer[i] == '-') {
         if (buffer[i-1] != ' ' && buffer[i-1] != '-') continue;
@@ -109,6 +113,6 @@ int main(int argc, char *argv[]) {
     }
     printf("Accepted: \"%s\"!\nSend status: %d \n", buffer, test);
 
-    sleep(1);
+    sleep(globalArgs.wait_time);
  }
 }
