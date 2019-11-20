@@ -13,7 +13,7 @@ const int BUFFER_LENGTH = 256;
 
 struct globalArgs_t {
   int portno;
-  int wait_time = 0;
+  int wait_time;
 } globalArgs;
 
 void error(char* msg) {
@@ -66,6 +66,9 @@ int main(int argc, char *argv[]) {
   socklen_t struct_len = sizeof(struct sockaddr_in);
   struct sockaddr_in serv_addr; //IP struct
   struct sockaddr from;
+
+  globalArgs.portno = NULL;
+  globalArgs.wait_time = 0;
 
   char buffer[BUFFER_LENGTH];
 
