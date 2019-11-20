@@ -22,7 +22,7 @@ void error(char* msg) {
 }
 
 void displayUsage(char* name) {
-  printf("\nUSAGE:\n%s [-h] [-p <port number>]\n\nARGS: \n-p Port number to listen\n-h: Help\n\n", name);
+  printf("\nUSAGE:\n%s [-h] [-p <port number>]\n\nARGS: \n-p Port number to listen\n-w Time to wait\n-h: Help\n\n", name);
   exit(0);
 }
 
