@@ -12,7 +12,7 @@
 char *STD_LOG_PATH = "/tmp/lab2.log";
 const char *optString = "p:w:l:hdv";
 const int BUFFER_LENGTH = 256;
-const char *VERSION = "0.9.1";
+const char *VERSION = "0.9.2";
 
 const char *LOG_SUCCESS = "\x1b[32mSUCCESS\x1b[0m";
 const char *LOG_ERROR = "\x1b[31mERROR\x1b[0m";
