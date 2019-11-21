@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 
 const char *optString = "p:a:m:hv";
-const char *VERSION = "0.1.1";
+const char *VERSION = "0.9.1";
 const int BUFFER_LENGTH = 256;
 
 struct globalArgs_t {
