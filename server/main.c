@@ -12,7 +12,7 @@
 char *STD_LOG_PATH = "/tmp/lab2.log";
 const char *optString = "p:w:l:a:hdv";
 const int BUFFER_LENGTH = 256;
-const char *VERSION = "0.9.4";
+const char *VERSION = "0.9.4.2";
 
 const char *LOG_SUCCESS = "\x1b[32mSUCCESS\x1b[0m";
 const char *LOG_ERROR = "\x1b[31mERROR\x1b[0m";
@@ -167,6 +167,7 @@ int main(int argc, char *argv[]) {
     exit(EXIT_SUCCESS);
   }
 
+  //Start log system
   if ((globalArgs.log_file = fopen(globalArgs.log_path, "a")) != NULL) {
     fclose(globalArgs.log_file);
     char req_str[256]; // TODO: dynamic allocation
@@ -237,10 +238,12 @@ int main(int argc, char *argv[]) {
 
     if (is_SNILS == 0) {
       int test = sendto(listenfd, "FAILED\n", 7, 0, &from, struct_len);
+      if (test == -1) error("Can not send responce to socket");
       asprintf(&msg_str, "Accepted request with message: %sResponded: FAILED", buffer);
       l2log(msg_str, LOG_REQUEST);
     } else {
       int test = sendto(listenfd, "OK\n", 3, 0, &from, struct_len);
+      if (test == -1) error("Can not send responce to socket");
       asprintf(&msg_str, "Accepted request with message: %sResponded: OK", buffer);
       l2log(msg_str, LOG_REQUEST);
     }

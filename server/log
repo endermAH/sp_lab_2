@@ -40,3 +40,8 @@ Responded: FAILED
 [31mERROR[0m: 21.11.19 21:29:22 - No ip to listen. Programm terminated
 [32mSUCCESS[0m: 21.11.19 21:39:08 - Daemon started with pid: 56541
 [32mSUCCESS[0m: 21.11.19 21:39:08 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 22:35:02 - Server terminated by SIGINT
+[32mSUCCESS[0m: 21.11.19 22:35:17 - Daemon started with pid: 57230
+[32mSUCCESS[0m: 21.11.19 22:35:17 - Daemod forked
+[32mSUCCESS[0m: 21.11.19 22:35:17 - Server started with log file: ./log
+[33mREQUEST[0m: 21.11.19 22:55:02 - Accepted request with message: 123123Responded: FAILED
