@@ -10,16 +10,16 @@
 #include <time.h>
 
 char *STD_LOG_PATH = "/tmp/lab2.log";
-const char *optString = "p:w:l:hdv";
+const char *optString = "p:w:l:i:hdv";
 const int BUFFER_LENGTH = 256;
-const char *VERSION = "0.9.2";
+const char *VERSION = "0.9.3";
 
 const char *LOG_SUCCESS = "\x1b[32mSUCCESS\x1b[0m";
 const char *LOG_ERROR = "\x1b[31mERROR\x1b[0m";
 const char *LOG_REQUEST = "\x1b[33mREQUEST\x1b[0m";
 const char *LOG_WARNING = "\x1b[35mWARNING\x1b[0m";
 
-pid_t pid;
+pid_t pid = NULL;
 
 int req_count = 0;
 
@@ -28,6 +28,7 @@ struct globalArgs_t {
   int wait_time;
   char* log_path;
   FILE* log_file;
+  struct in_addr listen_ip;
 } globalArgs;
 
 void l2log(char* msg, const char* status) {
@@ -62,7 +63,7 @@ void usr1_handler() {
 }
 
 void error(char* msg) {
-  perror(msg);
+  //perror(msg);
   l2log(msg, LOG_ERROR);
   exit(EXIT_FAILURE);
 }
@@ -94,8 +95,12 @@ int getStartData(int argc, char** argv) {
       case 'l':
         globalArgs.log_path = optarg;
         break;
+      case 'i':
+        if (inet_aton(optarg, &globalArgs.listen_ip) == 0) error("Failed to convert listen ip to net format");
+        break;
       case 'd':
         pid = fork();
+        break;
       default:
         break;
     }
@@ -141,7 +146,11 @@ int main(int argc, char *argv[]) {
 
   if (getenv("L2PORT") != NULL) globalArgs.portno = atoi(getenv("L2PORT"));
   if (getenv("L2WAIT") != NULL) globalArgs.wait_time = atoi(getenv("L2WAIT"));
-  globalArgs.log_path = getenv("L2LOGFILE");
+  if (getenv("L2LOGFILE") != NULL) globalArgs.log_path = getenv("L2LOGFILE");
+  if (getenv("L2ADDR") != NULL) {
+    if (inet_aton(getenv("L2ADDR"), &globalArgs.listen_ip) == 0)
+      l2log("Failed to convert listen ip from $L2ADDR to net format", LOG_WARNING);
+  }
 
   char buffer[BUFFER_LENGTH];
 
@@ -168,6 +177,10 @@ int main(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   };
 
+  if (globalArgs.listen_ip.s_addr == NULL) {
+      error("No ip to listen. Server stopped");
+  }
+
   //Create socket
   listenfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
   if (listenfd < 0) {
@@ -176,7 +189,7 @@ int main(int argc, char *argv[]) {
   }
 
   serv_addr.sin_family = AF_INET;
-  serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  serv_addr.sin_addr = globalArgs.listen_ip;
   serv_addr.sin_port = htons(globalArgs.portno);
 
    //Bind socket
