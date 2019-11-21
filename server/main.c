@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
   struct sockaddr_in serv_addr; //IP struct
   struct sockaddr from;
 
-  globalArgs.portno = getenv("L2PORT");
+  if (getenv("L2PORT") != NULL) globalArgs.portno = atoi(getenv("L2PORT"));
   if (getenv("L2WAIT") != NULL) globalArgs.wait_time = atoi(getenv("L2WAIT"));
   globalArgs.log_path = getenv("L2LOGFILE");
 
