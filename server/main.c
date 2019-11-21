@@ -82,7 +82,7 @@ int getStartData(int argc, char** argv) {
     switch (opt) {
       case 'v':
         printf("Current version: %s\n", VERSION);
-        exit(EXIT_FAILURE);
+        exit(EXIT_SUCCESS);
       case 'p':
         globalArgs.portno = atoi(optarg);
         break;
