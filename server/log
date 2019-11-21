@@ -1,0 +1,35 @@
+[32mSUCCESS[0m: 21.11.19 13:54:07 - Daemon started with pid: 53539
+[32mSUCCESS[0m: 21.11.19 13:54:07 - Server started with log file: ./log
+[33mREQUEST[0m: 21.11.19 13:54:21 - Accepted request with message: 123
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 13:54:24 - Accepted request with message: 123123
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 13:54:24 - Accepted request with message: 123123
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 13:54:25 - Accepted request with message: 123
+Responded: FAILED
+[32mSUCCESS[0m: 21.11.19 14:21:31 - Daemon started with pid: 53655
+[32mSUCCESS[0m: 21.11.19 14:21:31 - Server started with log file: ./log
+[32mSUCCESS[0m: 21.11.19 14:22:01 - Daemon started with pid: 53659
+[32mSUCCESS[0m: 21.11.19 14:22:01 - Daemod forked
+[32mSUCCESS[0m: 21.11.19 14:22:01 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:22:59 - Server terminated by SIGTERM
+[32mSUCCESS[0m: 21.11.19 14:23:45 - Daemod forked
+[32mSUCCESS[0m: 21.11.19 14:23:45 - Daemon started with pid: 53707
+[32mSUCCESS[0m: 21.11.19 14:23:45 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:24:00 - Server terminated by SIGTERM
+[32mSUCCESS[0m: 21.11.19 14:24:20 - Daemon started with pid: 53712
+[32mSUCCESS[0m: 21.11.19 14:24:20 - Server started with log file: ./log
+[32mSUCCESS[0m: 21.11.19 14:28:43 - Daemon started with pid: 53729
+[32mSUCCESS[0m: 21.11.19 14:28:43 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:28:45 - Server terminated by SIGINT
+[32mSUCCESS[0m: 21.11.19 14:29:08 - Daemon started with pid: 53734
+[32mSUCCESS[0m: 21.11.19 14:29:08 - Daemod forked
+[32mSUCCESS[0m: 21.11.19 14:29:08 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:29:26 - Server terminated by SIGTERM
+[32mSUCCESS[0m: 21.11.19 14:33:39 - Daemon started with pid: 53841
+[32mSUCCESS[0m: 21.11.19 14:33:39 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:33:51 - Server terminated by SIGINT
+[32mSUCCESS[0m: 21.11.19 14:33:55 - Daemon started with pid: 53845
+[32mSUCCESS[0m: 21.11.19 14:33:55 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:33:57 - Server terminated by SIGINT
