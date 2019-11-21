@@ -58,7 +58,7 @@ void interrupt_handler() {
 }
 
 void usr1_handler() {
-  fprintf(stderr, "Work time: %lu\nRequests count: %d\n", clock(), req_count);
+  fprintf(stderr, "Work time: %lu ms\nRequests count: %d\n", clock(), req_count);
 }
 
 void error(char* msg) {

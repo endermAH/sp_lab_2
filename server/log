@@ -57,3 +57,25 @@ Responded: FAILED
 [33mREQUEST[0m: 21.11.19 14:53:30 - Accepted request with message: Responded: FAILED
 [33mREQUEST[0m: 21.11.19 14:53:31 - Accepted request with message: Responded: FAILED
 [33mREQUEST[0m: 21.11.19 14:53:33 - Accepted request with message: Responded: FAILED
+[32mSUCCESS[0m: 21.11.19 14:55:21 - Daemod forked
+[32mSUCCESS[0m: 21.11.19 14:55:21 - Daemon started with pid: 54283
+[32mSUCCESS[0m: 21.11.19 14:55:21 - Server started with log file: ./log
+[35mWARNING[0m: 21.11.19 14:55:45 - Server terminated by SIGTERM
+[35mWARNING[0m: 21.11.19 14:55:45 - Server terminated by SIGTERM
+[32mSUCCESS[0m: 21.11.19 14:55:52 - Daemon started with pid: 54336
+[32mSUCCESS[0m: 21.11.19 14:55:53 - Server started with log file: ./log
+[32mSUCCESS[0m: 21.11.19 14:55:52 - Daemod forked
+[33mREQUEST[0m: 21.11.19 14:56:11 - Accepted request with message: Responded: FAILED
+[33mREQUEST[0m: 21.11.19 14:56:17 - Accepted request with message: 123
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 14:56:18 - Accepted request with message: 123
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 14:56:18 - Accepted request with message: 123
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 14:56:25 - Accepted request with message: 123111111-11111
+Responded: FAILED
+[33mREQUEST[0m: 21.11.19 14:56:34 - Accepted request with message: 111-111-111-11
+Responded: OK
+[33mREQUEST[0m: 21.11.19 14:56:41 - Accepted request with message: 111111-11111
+Responded: OK
+[33mREQUEST[0m: 21.11.19 14:56:45 - Accepted request with message: Responded: FAILED
