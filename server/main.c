@@ -8,12 +8,13 @@
 #include <string.h>
 #include <sys/types.h>
 
-const char *optString = "p:w:h";
+const char *optString = "p:w:l:h";
 const int BUFFER_LENGTH = 256;
 
 struct globalArgs_t {
   int portno;
   int wait_time;
+  char* log_path;
 } globalArgs;
 
 void error(char* msg) {
@@ -41,6 +42,10 @@ int getStartData(int argc, char** argv) {
         break;
       case 'w':
         globalArgs.wait_time = atoi(optarg);
+        break;
+      case 'l':
+        globalArgs.log_path = optarg;
+        break;
       default:
         break;
     }
@@ -69,20 +74,24 @@ int main(int argc, char *argv[]) {
 
   globalArgs.portno = NULL;
   globalArgs.wait_time = 0;
+  globalArgs.log_path = NULL;
 
   char buffer[BUFFER_LENGTH];
 
-  if (!getStartData(argc, argv)) exit(1); //Stop server with wrong input
+  if (!getStartData(argc, argv)) exit(EXIT_FAILURE); //Stop server with wrong input
 
-  //Creating socket
+  //Create socket
   listenfd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (listenfd < 0) error("Can not open \n");
+  if (listenfd < 0) {
+    perror("Can not open socket\n");
+    exit(EXIT_FAILURE);
+  }
 
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
   serv_addr.sin_port = htons(globalArgs.portno);
 
-   //Binding socket
+   //Bind socket
   int test = bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
 
   int counter;
@@ -94,7 +103,7 @@ int main(int argc, char *argv[]) {
     counter = 0;
     is_SNILS = 1;
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count-1; i++) {
       if (buffer[i] == ' ' || buffer[i] == '-') {
         if (buffer[i-1] != ' ' && buffer[i-1] != '-') continue;
         else {
@@ -108,11 +117,13 @@ int main(int argc, char *argv[]) {
       }
     }
 
+    if (buffer[count-1] != '\n') is_SNILS = 0;
     if (counter != 11) is_SNILS = 0;
+
     if (is_SNILS == 0) {
-      int test = sendto(listenfd, "no", 2, 0, &from, struct_len);
+      int test = sendto(listenfd, "FAILED\n", 7, 0, &from, struct_len);
     } else {
-      int test = sendto(listenfd, "yes", 3, 0, &from, struct_len);
+      int test = sendto(listenfd, "OK\n", 3, 0, &from, struct_len);
     }
     printf("Accepted: \"%s\"!\nSend status: %d \n", buffer, test);
 
