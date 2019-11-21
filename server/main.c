@@ -21,6 +21,8 @@ const char *LOG_WARNING = "\x1b[35mWARNING\x1b[0m";
 
 pid_t pid;
 
+int req_count = 0;
+
 struct globalArgs_t {
   int portno;
   int wait_time;
@@ -55,6 +57,10 @@ void interrupt_handler() {
   exit(EXIT_SUCCESS);
 }
 
+void usr1_handler() {
+  fprintf(stderr, "Work time: %lu\nRequests count: %d\n", clock(), req_count);
+}
+
 void error(char* msg) {
   perror(msg);
   l2log(msg, LOG_ERROR);
@@ -62,7 +68,7 @@ void error(char* msg) {
 }
 
 void displayUsage(char* name) {
-  printf("\nUSAGE:\n%s [-h] [-p <port number>] [-w <wait time>] [-l <path to log file>]\n\nARGS: \n-p Port number to listen\n-w Time to wait\n-h: Help\n\n", name);
+  printf("\nUSAGE:\n%s [-h] [-p <port number>] [-w <wait time>] [-l <path to log file>] [-v] [-d]", name);
   exit(EXIT_SUCCESS);
 }
 
@@ -124,6 +130,8 @@ int main(int argc, char *argv[]) {
   sigaction(SIGQUIT, &sa, 0);
   sa.sa_handler = interrupt_handler;
   sigaction(SIGINT, &sa, 0);
+  sa.sa_handler = usr1_handler;
+  sigaction(SIGUSR1, &sa, 0);
 
   int listenfd; //Socket descriptors
   int portno; //Port number
@@ -188,7 +196,10 @@ int main(int argc, char *argv[]) {
     val_pid = fork();
     if (val_pid == -1) {
       error("Failed to fork validating process");
-    } else if (val_pid != 0) { continue; }
+    } else if (val_pid != 0) {
+      req_count++;
+      continue;
+    }
 
     for (int i = 0; i < count-1; i++) {
       if (buffer[i] == ' ' || buffer[i] == '-') {
