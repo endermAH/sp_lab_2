@@ -10,7 +10,7 @@
 #include <time.h>
 
 char *STD_LOG_PATH = "/tmp/lab2.log";
-const char *optString = "p:w:l:i:hdv";
+const char *optString = "p:w:l:a:hdv";
 const int BUFFER_LENGTH = 256;
 const char *VERSION = "0.9.4";
 
@@ -95,7 +95,7 @@ int getStartData(int argc, char** argv) {
       case 'l':
         globalArgs.log_path = optarg;
         break;
-      case 'i':
+      case 'a':
         if (inet_aton(optarg, &globalArgs.listen_ip) == 0) error("Failed to convert listen ip to net format");
         break;
       case 'd':
