@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <time.h>
+#include <sys/wait.h>
 
 char *STD_LOG_PATH = "/tmp/lab2.log";
 const char *optString = "p:w:l:a:hdv";
@@ -204,6 +205,7 @@ int main(int argc, char *argv[]) {
   while(1) {
     memset(buffer, 0, BUFFER_LENGTH);
     int count = recvfrom(listenfd, buffer, BUFFER_LENGTH - 1, 0, &from, &struct_len);
+    l2log("Accepted request", LOG_REQUEST);
     counter = 0;
     is_SNILS = 1;
 
@@ -212,6 +214,7 @@ int main(int argc, char *argv[]) {
       error("Failed to fork validating process");
     } else if (val_pid != 0) {
       req_count++;
+      wait(NULL);
       continue;
     }
 
@@ -239,12 +242,12 @@ int main(int argc, char *argv[]) {
     if (is_SNILS == 0) {
       int test = sendto(listenfd, "FAILED\n", 7, 0, &from, struct_len);
       if (test == -1) error("Can not send responce to socket");
-      asprintf(&msg_str, "Accepted request with message: %sResponded: FAILED", buffer);
+      asprintf(&msg_str, "Request with message: %sResponded: FAILED", buffer);
       l2log(msg_str, LOG_REQUEST);
     } else {
       int test = sendto(listenfd, "OK\n", 3, 0, &from, struct_len);
       if (test == -1) error("Can not send responce to socket");
-      asprintf(&msg_str, "Accepted request with message: %sResponded: OK", buffer);
+      asprintf(&msg_str, "Request with message: %sResponded: OK", buffer);
       l2log(msg_str, LOG_REQUEST);
     }
 
