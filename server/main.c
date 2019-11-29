@@ -60,7 +60,7 @@ void interrupt_handler() {
 }
 
 void usr1_handler() {
-  fprintf(stderr, "Work time: %lu ms\nRequests count: %d\n", clock(), req_count);
+  fprintf(stderr, "\nWork time: %lu ms\nRequests count: %d\n", clock(), req_count);
 }
 
 void error(char* msg) {
@@ -158,12 +158,18 @@ int main(int argc, char *argv[]) {
   if (!getStartData(argc, argv)) exit(EXIT_FAILURE); //Stop server with wrong input
 
   char *daemon_log;
+  pid_t pid2;
   if (pid == 0) {
-    asprintf(&daemon_log, "Daemon started with pid: %d", getpid());
-    l2log(daemon_log, LOG_SUCCESS);
+    setsid();
+    pid2 = fork();
+    if (pid2 == 0) {
+      asprintf(&daemon_log, "Daemon started with pid: %d", getpid());
+      l2log(daemon_log, LOG_SUCCESS);
+    } else if (pid2 == -1) { error("Failed fork daemon"); }
+    else { exit(EXIT_SUCCESS); }
   } else if (pid == -1) {
     error("Failed fork daemon");
-  }else {
+  } else {
     l2log("Daemod forked", LOG_SUCCESS);
     exit(EXIT_SUCCESS);
   }
@@ -205,6 +211,7 @@ int main(int argc, char *argv[]) {
   while(1) {
     memset(buffer, 0, BUFFER_LENGTH);
     int count = recvfrom(listenfd, buffer, BUFFER_LENGTH - 1, 0, &from, &struct_len);
+    if (count == -1) continue;
     l2log("Accepted request", LOG_REQUEST);
     counter = 0;
     is_SNILS = 1;
@@ -214,7 +221,7 @@ int main(int argc, char *argv[]) {
       error("Failed to fork validating process");
     } else if (val_pid != 0) {
       req_count++;
-      wait(NULL);
+      waitpid(0, NULL, WNOHANG);
       continue;
     }
 

@@ -10,7 +10,7 @@
 #include <arpa/inet.h>
 
 const char *optString = "p:a:m:hv";
-const char *VERSION = "0.9.1";
+const char *VERSION = "0.9.3";
 const int BUFFER_LENGTH = 256;
 
 struct globalArgs_t {
@@ -103,7 +103,10 @@ int main(int argc, char *argv[]) {
 
     int test = bind(listenfd, (struct sockaddr*)&client_addr, sizeof(serv_addr));
 
-    test = sendto(listenfd, globalArgs.msg, strlen(globalArgs.msg), 0, (struct sockaddr*)&serv_addr, struct_len);
+    char *resp;
+
+    asprintf(&resp, "%s\n", globalArgs.msg);
+    test = sendto(listenfd, resp, strlen(resp), 0, (struct sockaddr*)&serv_addr, struct_len);
     if (test == -1) {
       error("Failed to send to socket");
     }

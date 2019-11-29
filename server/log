@@ -1,47 +1,20 @@
-
-[35mWARNING[0m: 21.11.19 20:50:36 - Second point
-[32mSUCCESS[0m: 21.11.19 20:50:36 - Daemon started with pid: 56233
-[32mSUCCESS[0m: 21.11.19 20:50:36 - Server started with log file: ./log
-[35mWARNING[0m: 21.11.19 20:50:48 - Server terminated by SIGINT
-[35mWARNING[0m: 21.11.19 20:52:07 - Second point
-[32mSUCCESS[0m: 21.11.19 20:52:07 - Daemon started with pid: 56240
-[32mSUCCESS[0m: 21.11.19 20:52:07 - Server started with log file: ./log
-[35mWARNING[0m: 21.11.19 20:52:25 - Server terminated by SIGINT
-[35mWARNING[0m: 21.11.19 20:52:34 - Second point
-[32mSUCCESS[0m: 21.11.19 20:52:34 - Daemon started with pid: 56244
-[32mSUCCESS[0m: 21.11.19 20:52:34 - Server started with log file: ./log
-[35mWARNING[0m: 21.11.19 20:53:00 - Server terminated by SIGINT
-[35mWARNING[0m: 21.11.19 20:53:02 - Second point
-[35mWARNING[0m: 21.11.19 20:53:02 - Second point
-[32mSUCCESS[0m: 21.11.19 20:53:02 - Daemod forked
-[32mSUCCESS[0m: 21.11.19 20:53:02 - Daemon started with pid: 56252
-[32mSUCCESS[0m: 21.11.19 20:53:02 - Server started with log file: ./log
-[35mWARNING[0m: 21.11.19 21:04:51 - Server terminated by SIGTERM
-[32mSUCCESS[0m: 21.11.19 21:08:13 - Daemon started with pid: 56368
-[32mSUCCESS[0m: 21.11.19 21:08:13 - Server started with log file: ./log
-[33mREQUEST[0m: 21.11.19 21:08:35 - Accepted request with message: 123
-Responded: FAILED
-[35mWARNING[0m: 21.11.19 21:08:55 - Server terminated by SIGINT
-[32mSUCCESS[0m: 21.11.19 21:09:09 - Daemon started with pid: 56434
-[32mSUCCESS[0m: 21.11.19 21:09:09 - Server started with log file: ./log
-[33mREQUEST[0m: 21.11.19 21:09:14 - Accepted request with message: 123
-Responded: FAILED
-[35mWARNING[0m: 21.11.19 21:25:50 - Server terminated by SIGINT
-[32mSUCCESS[0m: 21.11.19 21:27:36 - Daemon started with pid: 56496
-[32mSUCCESS[0m: 21.11.19 21:27:36 - Server started with log file: ./log
-[33mREQUEST[0m: 21.11.19 21:27:43 - Accepted request with message: 123
-Responded: FAILED
-[35mWARNING[0m: 21.11.19 21:27:48 - Server terminated by SIGINT
-[32mSUCCESS[0m: 21.11.19 21:27:53 - Daemon started with pid: 56501
-[32mSUCCESS[0m: 21.11.19 21:27:53 - Server started with log file: ./log
-[31mERROR[0m: 21.11.19 21:27:53 - No ip to listen. Programm terminated
-[32mSUCCESS[0m: 21.11.19 21:29:22 - Daemon started with pid: 56505
-[32mSUCCESS[0m: 21.11.19 21:29:22 - Server started with log file: ./log
-[31mERROR[0m: 21.11.19 21:29:22 - No ip to listen. Programm terminated
-[32mSUCCESS[0m: 21.11.19 21:39:08 - Daemon started with pid: 56541
-[32mSUCCESS[0m: 21.11.19 21:39:08 - Server started with log file: ./log
-[35mWARNING[0m: 21.11.19 22:35:02 - Server terminated by SIGINT
-[32mSUCCESS[0m: 21.11.19 22:35:17 - Daemon started with pid: 57230
-[32mSUCCESS[0m: 21.11.19 22:35:17 - Daemod forked
-[32mSUCCESS[0m: 21.11.19 22:35:17 - Server started with log file: ./log
-[33mREQUEST[0m: 21.11.19 22:55:02 - Accepted request with message: 123123Responded: FAILED
+
+[32mSUCCESS[0m: 29.11.19 15:06:50 - Daemod forked
+[32mSUCCESS[0m: 29.11.19 15:06:50 - Daemon started with pid: 98423
+[32mSUCCESS[0m: 29.11.19 15:06:50 - Server started with log file: ./log
+[33mREQUEST[0m: 29.11.19 15:08:38 - Accepted request
+[33mREQUEST[0m: 29.11.19 15:08:48 - Request with message: 123-123-123-12
+Responded: OK
+[32mSUCCESS[0m: 29.11.19 15:09:16 - Daemod forked
+[32mSUCCESS[0m: 29.11.19 15:09:16 - Daemon started with pid: 98434
+[32mSUCCESS[0m: 29.11.19 15:09:16 - Server started with log file: ./log
+[33mREQUEST[0m: 29.11.19 15:09:27 - Accepted request
+[33mREQUEST[0m: 29.11.19 15:09:37 - Request with message: 123-123-123-12
+Responded: OK
+[35mWARNING[0m: 29.11.19 15:10:39 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:10:55 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:10:58 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:11:13 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:11:16 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:11:28 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:11:31 - Server terminated by SIGTERM
