@@ -44,6 +44,29 @@ void l2log(char* msg, const char* status) {
   fclose(globalArgs.log_file);
 }
 
+void become_daemon() {
+  pid = fork();
+  char *daemon_log;
+  pid_t pid2;
+  if (pid == 0) {
+    int check_session = setsid();
+    if (check_session == -1) {
+      error("Can not create new session. Server stopped");
+    }
+    pid2 = fork();
+    if (pid2 == 0) {
+      asprintf(&daemon_log, "Daemon started with pid: %d", getpid());
+      l2log(daemon_log, LOG_SUCCESS);
+    } else if (pid2 == -1) { error("Failed fork daemon"); }
+    else { exit(EXIT_SUCCESS); }
+  } else if (pid == -1) {
+    error("Failed fork daemon");
+  } else {
+    l2log("Daemod forked", LOG_SUCCESS);
+    exit(EXIT_SUCCESS);
+  }
+}
+
 void term_handler() {
   l2log("Server terminated by SIGTERM", LOG_WARNING);
   exit(EXIT_SUCCESS);
@@ -100,7 +123,7 @@ int getStartData(int argc, char** argv) {
         if (inet_aton(optarg, &globalArgs.listen_ip) == 0) error("Failed to convert listen ip to net format");
         break;
       case 'd':
-        pid = fork();
+        become_daemon();
         break;
       default:
         break;
@@ -156,23 +179,6 @@ int main(int argc, char *argv[]) {
   char buffer[BUFFER_LENGTH];
 
   if (!getStartData(argc, argv)) exit(EXIT_FAILURE); //Stop server with wrong input
-
-  char *daemon_log;
-  pid_t pid2;
-  if (pid == 0) {
-    setsid();
-    pid2 = fork();
-    if (pid2 == 0) {
-      asprintf(&daemon_log, "Daemon started with pid: %d", getpid());
-      l2log(daemon_log, LOG_SUCCESS);
-    } else if (pid2 == -1) { error("Failed fork daemon"); }
-    else { exit(EXIT_SUCCESS); }
-  } else if (pid == -1) {
-    error("Failed fork daemon");
-  } else {
-    l2log("Daemod forked", LOG_SUCCESS);
-    exit(EXIT_SUCCESS);
-  }
 
   //Start log system
   if ((globalArgs.log_file = fopen(globalArgs.log_path, "a")) != NULL) {

@@ -18,3 +18,10 @@ Responded: OK
 [35mWARNING[0m: 29.11.19 15:11:16 - Server terminated by SIGTERM
 [35mWARNING[0m: 29.11.19 15:11:28 - Server terminated by SIGTERM
 [35mWARNING[0m: 29.11.19 15:11:31 - Server terminated by SIGTERM
+[35mWARNING[0m: 29.11.19 15:23:42 - Server terminated by SIGTERM
+[32mSUCCESS[0m: 29.11.19 15:23:59 - Daemod forked
+[32mSUCCESS[0m: 29.11.19 15:23:59 - Daemon started with pid: 98514
+[32mSUCCESS[0m: 29.11.19 15:23:59 - Server started with log file: ./log
+[33mREQUEST[0m: 29.11.19 15:28:39 - Accepted request
+[33mREQUEST[0m: 29.11.19 15:28:49 - Request with message: 123-123-123-12
+Responded: OK
