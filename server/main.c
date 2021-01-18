@@ -46,6 +46,12 @@ void l2log(char* msg, const char* status) {
   fclose(globalArgs.log_file);
 }
 
+void error(char* msg) {
+  //perror(msg);
+  l2log(msg, LOG_ERROR);
+  exit(EXIT_FAILURE);
+}
+
 void become_daemon() {
   pid = fork();
   char *daemon_log;
@@ -86,12 +92,6 @@ void interrupt_handler() {
 
 void usr1_handler() {
   fprintf(stderr, "\nWork time: %lu ms\nRequests count: %d\n", clock(), req_count);
-}
-
-void error(char* msg) {
-  //perror(msg);
-  l2log(msg, LOG_ERROR);
-  exit(EXIT_FAILURE);
 }
 
 void displayUsage(char* name) {
